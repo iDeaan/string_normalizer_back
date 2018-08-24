@@ -17,13 +17,20 @@ const server = http.createServer((req, res) => {
   if (req.method === 'GET') {
     NormalizeIterations.findOne({})
       .then((normalizeIteration) => {
-        console.log('normalizeIteration', normalizeIteration);
-        res.statusCode = 200;
+        let code = 200;
+        let message = 'SUCCESS';
+
+        if (!normalizeIteration) {
+          code = 404;
+          message = 'RECORDS NOT FOUND';
+        }
+
+        res.statusCode = code;
 
         const responseData = {
           meta: {
-            code: 200,
-            message: "SUCCESS"
+            code,
+            message
           },
           data: normalizeIteration
         };
