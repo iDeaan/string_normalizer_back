@@ -35,6 +35,7 @@ const server = http.createServer((req, res) => {
           data: normalizeIteration
         };
 
+        res.setHeader("Access-Control-Allow-Origin", "*");
         res.setHeader('Content-Type', 'application/json');
         res.end(JSON.stringify(responseData));
       })
@@ -70,11 +71,14 @@ const server = http.createServer((req, res) => {
                 data:iteration
               };
 
+              res.setHeader("Access-Control-Allow-Origin", "*");
               res.setHeader('Content-Type', 'application/json');
               res.end(JSON.stringify(responseData));
             })
             .catch((err) => {
               this.code = 201;
+
+              res.setHeader("Access-Control-Allow-Origin", "*");
               res.end(JSON.stringify({
                 meta: {
                   code: 422,
@@ -98,6 +102,7 @@ const server = http.createServer((req, res) => {
           },
         };
 
+        res.setHeader("Access-Control-Allow-Origin", "*");
         res.setHeader('Content-Type', 'application/json');
         res.end(JSON.stringify(responseData));
       })
